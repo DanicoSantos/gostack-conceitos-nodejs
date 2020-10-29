@@ -33,7 +33,7 @@ app.put("/repositories/:id", (request, response) => {
 
   if (repositoryIndex < 0) return response.status(400).json({ error: "Project not found" });
 
-  const newRepository = {
+  const newRepositoryData = {
     id: id,
     title: title,
     url: url,
@@ -41,9 +41,9 @@ app.put("/repositories/:id", (request, response) => {
     likes: repositories[repositoryIndex].likes
   }
 
-  repositories[repositoryIndex] = newRepository;
+  repositories[repositoryIndex] = newRepositoryData;
 
-  return response.json(newRepository);
+  return response.json(newRepositoryData);
 });
 
 app.delete("/repositories/:id", (request, response) => {
@@ -65,7 +65,7 @@ app.post("/repositories/:id/like", (request, response) => {
 
   if (repositoryIndex < 0) return response.status(400).json({ error: 'Project not found' });
 
-  const newRepository = {
+  const newRepositoryData = {
     id: id,
     title: repositories[repositoryIndex].title,
     url: repositories[repositoryIndex].url,
@@ -73,7 +73,7 @@ app.post("/repositories/:id/like", (request, response) => {
     likes: repositories[repositoryIndex].likes + 1
   }
 
-  repositories[repositoryIndex] = newRepository
+  repositories[repositoryIndex] = newRepositoryData
 
   return response.json(repositories[repositoryIndex]);
 });
